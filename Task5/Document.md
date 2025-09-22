@@ -27,7 +27,7 @@ DevMetrics uses NAT Gateways in two Availability Zones to allow backend microser
 | NAT Gateway   | $155.70      |
 | NAT Instance  | $60.74       |
 
-> **Source**: [AWS Pricing Calculator Estimate](https://calculator.aws/#/estimate?id=bc92a39: 09/22/2025  
+> **Source**: [AWS Pricing Calculator Estimate](https://calculator.aws)
 > **File Submitted**: `Pricing-Calculator.pdf`
 
 ---
