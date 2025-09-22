@@ -33,6 +33,27 @@ Set up a centralized S3 bucket to store unstructured data and user profile pictu
 | 31 (optional)       | Transition to Intelligent-Tiering| Intelligent-Tiering         |
 
 ## Why This Configuration Works
-- **Meets access patterns**: Recent backups are quickly accessible, older backups are moved to cheaper storage with appropriate restore SLAs.
-- **Cost optimization**: Automated transitions reduce storage costs over time.
-- **Compliance**: Data is retained
+
+The lifecycle configuration directly maps to the business requirements:
+
+### Backup Data
+- **0–30 days**: Stored in Standard for frequent access and fast restoration.
+- **31–90 days**: Moved to Intelligent-Tiering to reduce cost while maintaining quick access.
+- **Beyond 90 days**: Transitioned to Glacier Instant Retrieval for rare access with fast restore.
+- **Beyond 6 months**: Stored in Glacier Deep Archive for compliance, with up to 24-hour restore SLA.
+- **After 1 year**: Automatically deleted to avoid unnecessary storage costs.
+
+### Profile Pictures
+- Stored in Standard for fast access during profile loads.
+- Optional transition to Intelligent-Tiering after 30 days to reduce cost if access drops.
+
+This setup ensures:
+- Fast access for recent and frequently used data
+- Cost savings through automated transitions
+- Compliance with retention policies
+- Simplified API access for developers
+
+---
+
+## ✅ Outcome
+The bucket is now optimized for both performance and cost. Lifecycle rules are in place to automatically manage storage classes based on access patterns, ensuring we meet business SLAs while minimizing unnecessary spend.
