@@ -1,59 +1,71 @@
 # Task 3: Budget Setup and Tagging Strategy for AdSpark
 
-## Scenario
+## Overview
 
-AdSpark, a digital marketing startup, has recently migrated its infrastructure to AWS. The CFO is concerned about uncontrolled cloud spending due to engineers testing services without limits. As the Cloud Solutions Architect, you were tasked with implementing cost controls to prevent budget overruns.
+AdSpark has recently migrated its infrastructure to AWS. To address concerns raised by the CFO regarding uncontrolled cloud spending, a cost control strategy was implemented. This includes budget configuration, alert thresholds, and a tagging framework to ensure visibility and accountability across environments and teams.
 
-## Business Requirements
-
-- A monthly AWS budget of $1,000 covering both Production and Development environments.
-- Email alerts when:
-  - 50% of the budget is reached (early warning)
-  - 80% of the budget is reached (urgent action required)
-- A tagging strategy to identify resources by environment and team.
-- A mechanism to enable cost breakdown by environment and team ownership.
+---
 
 ## Budget Configuration
 
-A monthly cost budget named `adspark-monthly-budget` was created with the following settings:
+A monthly cost budget was created to monitor and control AWS spending.
 
+- **Budget Name**: `adspark-monthly-budget`
 - **Budget Type**: Cost Budget
 - **Amount**: $1,000 USD
 - **Period**: Monthly recurring
-- **Scope**: All AWS services
+- **Scope**: All AWS services used by AdSpark
 
 ### Alert Thresholds
 
 Two alert thresholds were configured:
 
-- **50% Threshold**: Sends email notification to the CFO and Cloud Architect.
-- **80% Threshold**: Sends email and SNS notification to the CFO, Cloud Architect, and DevOps team.
+- **50% Threshold**: Early warning email alert
+- **80% Threshold**: Urgent action email alert
 
-All screenshots of the budget setup and alert configuration are available in the folder.
+These alerts notify stakeholders when spending approaches critical levels, allowing timely intervention.
+
+---
 
 ## Tagging Strategy
 
-To ensure resources are easily identifiable by environment and team, the following tagging policy was defined:
+To ensure that administrators can easily identify which resources belong to specific environments and teams, a standardized tagging strategy was defined.
+
+### Tag Keys and Example Values
 
 | Tag Key     | Example Values              | Purpose                                  |
 |-------------|-----------------------------|------------------------------------------|
-| Environment | Production, Development      | Distinguish between environments         |
-| Team        | IT, Engineering | Attribute resources to teams         |
-| Owner       | dhruv                 | Identify responsible person              |
-| Project     | AdSparkApp                   | Link resources to specific projects      |
+| Environment | Production, Development     | Distinguish between environments         |
+| Team        | Marketing, IT, Engineering | Attribute resources to teams     |
+| Owner       | dhruv                | Identify responsible person              |
+| Project     | AdSparkApp                  | Link resources to specific projects      |
 
-This tagging strategy will be applied to all future AWS resources during creation or via the Tag Editor.
+These tags will be applied to all future AWS resources during creation or via the Tag Editor.
+
+---
 
 ## Cost Allocation Tag Activation
 
-To enable cost tracking by tags, the following steps were completed:
+To enable cost tracking by tags, the defined tag keys were activated as **Cost Allocation Tags** in the AWS Billing Console. This ensures that AWS will associate usage and charges with the appropriate tags once resources are created.
 
-1. Navigated to the **Billing Dashboard**.
-2. Opened **Cost Allocation Tags**.
-3. Activated custom tags including `Environment` and `Team`.
+---
 
-All screenshots of the tag activation process are available in the folder.
+## How the Solution Solves the Problem
 
-## Outcome
+### Budget Alerts
 
-AdSpark now has a proactive cost control mechanism in place. Budget alerts will notify stakeholders before overspending occurs, and the tagging strategy ensures future resources can be tracked and categorized effectively.
+The budget and alert thresholds directly address the CFO’s concern about uncontrolled spending. Early and urgent notifications allow the team to monitor usage and take corrective action before exceeding the budget.
+
+### Resource Identification
+
+The tagging strategy ensures that every resource is clearly labeled by environment and team. This improves visibility, simplifies audits, and supports accountability.
+
+### Cost Breakdown by Environment and Team
+
+By activating cost allocation tags, AWS will track and associate costs with the defined tags. This enables future cost analysis by environment (Production vs. Development) and team ownership (Analytics, Engineering), supporting informed financial decisions.
+
+---
+
+## Screenshots
+
+All screenshots of the AWS console configurations (budget setup, alert thresholds, tag activation) are available in the folder.
