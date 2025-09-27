@@ -50,6 +50,16 @@ To enable cost tracking by tags, the defined tag keys were activated as **Cost A
 
 ---
 
+## Cost Breakdown Using AWS Cost Explorer
+
+AWS Cost Explorer was enabled and configured to analyze spending by environment and team ownership. Reports can be generated to show:
+- Monthly cost breakdown by `Environment` tag (Production vs. Development)
+- Monthly cost breakdown by `Team` tag (Marketing, Analytics, Engineering)
+
+This allows the finance and engineering teams to understand which areas are driving costs and adjust usage accordingly.
+
+----
+
 ## How the Solution Solves the Problem
 
 ### Budget Alerts
@@ -63,6 +73,9 @@ The tagging strategy ensures that every resource is clearly labeled by environme
 ### Cost Breakdown by Environment and Team
 
 By activating cost allocation tags, AWS will track and associate costs with the defined tags. This enables future cost analysis by environment (Production vs. Development) and team ownership (Analytics, Engineering), supporting informed financial decisions.
+
+### Cost Explorer
+- Enabling cost visibility and accountability via Cost Explorer, so we can have a look of costing according to the tags.
 
 ---
 
