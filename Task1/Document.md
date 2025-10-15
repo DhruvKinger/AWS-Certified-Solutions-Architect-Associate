@@ -1,3 +1,4 @@
+
 # Task 1: S3 Bucket Setup for Centralized Storage & Lifecycle Management
 
 ## Objective
@@ -21,7 +22,6 @@ Set up a centralized S3 bucket to store unstructured data and user profile pictu
 | Days After Creation | Action                          | Storage Class               |
 |---------------------|----------------------------------|-----------------------------|
 | 0–30                | Keep in Standard                 | Standard                    |
-| 31                  | Transition to Intelligent-Tiering| Intelligent-Tiering         |
 | 91                  | Transition to Glacier Instant Retrieval | Glacier Instant Retrieval |
 | 181                 | Transition to Glacier Deep Archive | Glacier Deep Archive       |
 | 365                 | Expire/Delete                    | N/A                         |
@@ -29,31 +29,31 @@ Set up a centralized S3 bucket to store unstructured data and user profile pictu
 ### Rule 2: Profile Pictures (`profile-pictures/` prefix)
 | Days After Creation | Action                          | Storage Class               |
 |---------------------|----------------------------------|-----------------------------|
-| 0–30                | Keep in Standard                 | Standard                    |
-| 31 (optional)       | Transition to Intelligent-Tiering| Intelligent-Tiering         |
+| 0–365               | Keep in Standard                 | Standard                    |
+| Optional Cleanup    | Delete expired object markers, incomplete uploads | N/A         |
 
 ## Why This Configuration Works
 
-The lifecycle configuration directly maps to the business requirements:
-
 ### Backup Data
 - **0–30 days**: Stored in Standard for frequent access and fast restoration.
-- **31–90 days**: Moved to Intelligent-Tiering to reduce cost while maintaining quick access.
 - **Beyond 90 days**: Transitioned to Glacier Instant Retrieval for rare access with fast restore.
 - **Beyond 6 months**: Stored in Glacier Deep Archive for compliance, with up to 24-hour restore SLA.
 - **After 1 year**: Automatically deleted to avoid unnecessary storage costs.
 
 ### Profile Pictures
-- Stored in Standard for fast access during profile loads.
-- Optional transition to Intelligent-Tiering after 30 days to reduce cost if access drops.
+- Stored in Standard for fast and consistent access during profile loads.
+- No transition to Intelligent-Tiering, as access patterns are predictable and frequent.
+- Cleanup rules help manage storage costs without affecting availability.
 
 This setup ensures:
 - Fast access for recent and frequently used data
-- Cost savings through automated transitions
+- Cost savings through automated transitions for backups
 - Compliance with retention policies
 - Simplified API access for developers
 
 ---
 
-## ✅ Outcome
+## Outcome
 The bucket is now optimized for both performance and cost. Lifecycle rules are in place to automatically manage storage classes based on access patterns, ensuring we meet business SLAs while minimizing unnecessary spend.
+
+All screenshots of the configuration are available in the folder.
